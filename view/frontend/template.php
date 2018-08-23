@@ -9,6 +9,16 @@
     </head>
 
     <body>
+        <div>
+            <p><a href="index.php?action=login">ADMINISTRATION</a></p>
+        </div>
+
+        <?php 
+            if (isset($_SESSION['login'])){
+                echo 'Bonjour ' . $_SESSION['login'];
+            }
+        ?>       
+         
         <?= $content ?>
     </body>
 </html>

@@ -1,5 +1,7 @@
 <?php
+session_start();
 require('controller/controllerFrontend.php');
+require('controller/controllerBackend.php');
 
 try{
 	if (isset($_GET['action'])) {
@@ -27,6 +29,28 @@ try{
 	    		throw new Exception('Aucun identifiant de billet envoyé');
 	    	}
 	    }
+	    elseif(isset($_POST['submitAdmin'])){
+	    	if(!empty($_POST['login']) && !empty($_POST['pass'])){ 
+	    		login($_POST['login']);
+	    	}
+	    	else{
+		        throw new Exception('Veuillez remplir tout les champs');
+		    }	
+	    }	
+		elseif(isset($_SESSION['login'])){
+			if($_GET['action'] == 'login'){
+				require('view/backend/admin.php');
+				listPosts();
+			}
+		}
+		else{
+			if(isset($_POST['login'])){
+				login($_POST['login']);
+			}
+			else{
+				require('view/frontend/login.php');
+			}
+		}
 	}
 	else {
 	    listPosts();
