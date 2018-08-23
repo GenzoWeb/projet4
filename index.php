@@ -53,6 +53,27 @@ try{
 				else{
 					throw new Exception('Tous les champs ne sont pas remplis !');
 				}
+		    }
+		    elseif ($_GET['action'] == 'editPost') {
+		        if (isset($_GET['id']) && $_GET['id'] > 0) {
+		            postAdmin();
+		        }
+		        else {
+		            throw new Exception('Aucun identifiant de billet envoyé');
+		        }
+		    }
+		    elseif ($_GET['action'] == 'update') {
+		        if (isset($_GET['id']) && $_GET['id'] > 0) {
+		        	if (!empty($_POST['title']) && !empty($_POST['content'])){
+		            	editPost($_GET['id'], $_POST['title'], $_POST['content']);
+		            }
+		            else{
+	    				throw new Exception('Tous les champs ne sont pas remplis !');
+	    			}
+		        }
+		        else {
+		            throw new Exception('Aucun identifiant de billet envoyé');
+		        }
 		    }	
 		}
 		else{

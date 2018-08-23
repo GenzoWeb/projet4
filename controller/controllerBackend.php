@@ -33,3 +33,24 @@ function addPost($title, $content)
 		require('view/backend/admin.php');
 	}
 }
+
+function postAdmin()
+{
+	$postManager = new PostManager();
+    $postAdmin = $postManager->getPost($_GET['id']);
+
+    require('view/backend/editPost.php');
+}
+
+function editPost($postId, $title, $content)
+{
+	$postManager = new PostManager();
+	$rewritePost = $postManager->updatePost($postId, $title, $content);
+
+	if($rewritePost === false){
+		throw new Exception('Impossible de modifier le billet !');
+	}
+	else {
+		header('Location: index.php?action=editPost&id=' . $postId);
+	}	
+}

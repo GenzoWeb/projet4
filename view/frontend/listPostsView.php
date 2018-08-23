@@ -11,6 +11,15 @@ while($data = $posts->fetch())
 
 <h3>
 	<?= htmlspecialchars($data['title'])?> le <?= $data['creation_date_fr']?>
+	<?php 
+		if(isset($_SESSION['login'])){
+	?>	
+		<em>
+			<a href="index.php?action=editPost&id=<?=$data['id']?>">Modifier</a>
+		</em>	
+	<?php	
+		}
+	?>
 </h3>
 
 <p>
