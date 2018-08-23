@@ -20,3 +20,16 @@ function login($login)
 
     require('view/frontend/login.php');
 }
+
+function addPost($title, $content)
+{
+	$postManager = new PostManager();
+	$newPost = $postManager->createPost($title, $content);
+
+	if($newPost === false){
+		throw new Exception('Impossible d\'ajouter le billet !');
+	}
+	else {
+		require('view/backend/admin.php');
+	}
+}

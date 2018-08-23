@@ -6,7 +6,7 @@ class PostManager extends Manager
     public function getPosts()
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date_fr FROM posts');
+        $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date_fr FROM posts ORDER BY id DESC');
         
         return $req;
     }
@@ -18,5 +18,14 @@ class PostManager extends Manager
         $post = $req->fetch();
 
         return $post;
-    }      
+    }     
+
+    public function createPost($title, $content)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('INSERT INTO posts(title, content, creation_date) VALUES (?, ?, NOW())');
+        $newPost = $req->execute(array($title, $content));
+        
+        return $newPost;
+    }     
 }

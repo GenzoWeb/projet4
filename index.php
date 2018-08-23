@@ -42,6 +42,18 @@ try{
 				require('view/backend/admin.php');
 				listPosts();
 			}
+			elseif($_GET['action'] == 'newPost'){
+				require('view/backend/addPost.php');
+			}
+		    elseif($_GET['action'] == 'addPost'){
+		    	if (!empty($_POST['title']) && !empty($_POST['content'])){
+					addPost($_POST['title'], $_POST['content']);
+					listPosts();
+				}
+				else{
+					throw new Exception('Tous les champs ne sont pas remplis !');
+				}
+		    }	
 		}
 		else{
 			if(isset($_POST['login'])){
