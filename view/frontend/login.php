@@ -1,5 +1,3 @@
-<?php include('test.php') ?>
-
 <?php $title = "Connectez-vous" ?>
 
 <?php ob_start(); ?>

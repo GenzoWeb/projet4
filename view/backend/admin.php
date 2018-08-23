@@ -4,6 +4,7 @@ $title = 'Administration'; ?>
 <?php ob_start(); ?>
 <ul>
 	<li><a href="">Accueil</a></li>
+	<li><a href="view/backend/logout.php">Déconnexion</a></li>
 </ul>
 
 <?php
