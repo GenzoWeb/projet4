@@ -16,6 +16,9 @@ while($data = $posts->fetch())
 	?>	
 		<em>
 			<a href="index.php?action=editPost&id=<?=$data['id']?>">Modifier</a>
+		</em>
+		<em>
+			<a href="index.php?action=deletePost&id=<?=$data['id']?>">Supprimer</a>
 		</em>	
 	<?php	
 		}

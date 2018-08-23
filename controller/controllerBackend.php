@@ -39,7 +39,12 @@ function postAdmin()
 	$postManager = new PostManager();
     $postAdmin = $postManager->getPost($_GET['id']);
 
-    require('view/backend/editPost.php');
+    if($_GET['action'] == 'editPost'){
+    	require('view/backend/editPost.php');
+    }
+    if($_GET['action'] == 'deletePost'){
+    	require('view/backend/deletePost.php');
+    }
 }
 
 function editPost($postId, $title, $content)
@@ -52,5 +57,18 @@ function editPost($postId, $title, $content)
 	}
 	else {
 		header('Location: index.php?action=editPost&id=' . $postId);
+	}	
+}
+
+function removePost($postId)
+{
+	$postManager = new PostManager();
+	$erasePost = $postManager->deletePost($postId);
+
+	if($erasePost === false){
+		throw new Exception('Impossible de supprimer le billet !');
+	}
+	else {
+		header('Location: index.php?action=login');
 	}	
 }

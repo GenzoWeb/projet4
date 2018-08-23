@@ -10,6 +10,7 @@ class PostManager extends Manager
         
         return $req;
     }
+
     public function getPost($postId)
     {
         $db = $this->dbConnect();
@@ -18,7 +19,7 @@ class PostManager extends Manager
         $post = $req->fetch();
 
         return $post;
-    }     
+    }  
 
     public function createPost($title, $content)
     {
@@ -36,5 +37,14 @@ class PostManager extends Manager
         $rewritePost = $req->execute(array($title, $content, $postId));
         
         return $rewritePost;
-    }         
+    }
+
+    public function deletePost($postId)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('DELETE posts, comments FROM posts LEFT JOIN comments ON posts.id = comments.post_id WHERE posts.id = ?');
+        $erasePost = $req->execute(array($postId));
+        
+        return $erasePost;
+    }
 }

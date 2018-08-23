@@ -74,7 +74,23 @@ try{
 		        else {
 		            throw new Exception('Aucun identifiant de billet envoyé');
 		        }
-		    }	
+		    }
+		    elseif ($_GET['action'] == 'deletePost') {
+		        if (isset($_GET['id']) && $_GET['id'] > 0) {
+		            postAdmin();
+		        }
+		        else {
+		            throw new Exception('Aucun identifiant de billet envoyé');
+		        }
+		    }
+		    elseif ($_GET['action'] == 'remove'){
+		     	if (isset($_GET['id']) && $_GET['id'] > 0) {
+		     		removePost($_GET['id']);
+		     	}
+		     	else{
+		     		throw new Exception('Aucun identifiant de billet envoyé');
+		     	}   
+		    } 	
 		}
 		else{
 			if(isset($_POST['login'])){
