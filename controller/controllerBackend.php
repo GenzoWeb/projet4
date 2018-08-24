@@ -72,3 +72,32 @@ function removePost($postId)
 		header('Location: index.php?action=login');
 	}	
 }
+
+function moderateComments()
+{
+	$commentManager = new CommentManager();
+	$moderate = $commentManager->getCommentsAdmin();
+
+	require('view/backend/moderate.php');
+}
+
+function comment()
+{
+	$commentManager = new CommentManager();
+    $comment = $commentManager->getComment($_GET['id']);
+
+    require('view/backend/deleteComment.php');
+}
+
+function removeComment($id)
+{
+	$commentManager = new CommentManager();
+	$eraseComment = $commentManager->deleteComment($id);
+
+	if($eraseComment === false){
+		throw new Exception('Impossible de supprimer le commentaire !');
+	}
+	else {
+		header('Location: index.php?action=moderate');
+	}	
+}
