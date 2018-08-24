@@ -86,7 +86,12 @@ function comment()
 	$commentManager = new CommentManager();
     $comment = $commentManager->getComment($_GET['id']);
 
-    require('view/backend/deleteComment.php');
+    if($_GET['action'] == 'editComment'){
+    	require('view/backend/editComment.php');
+	}
+	if($_GET['action'] == 'deleteComment'){
+    	require('view/backend/deleteComment.php');
+	}
 }
 
 function removeComment($id)
@@ -96,6 +101,19 @@ function removeComment($id)
 
 	if($eraseComment === false){
 		throw new Exception('Impossible de supprimer le commentaire !');
+	}
+	else {
+		header('Location: index.php?action=moderate');
+	}	
+}
+
+function editComment($id, $comment)
+{
+	$commentManager = new CommentManager();
+	$rewriteComment = $commentManager->updateComment($id, $comment);
+
+	if($rewriteComment === false){
+		throw new Exception('Impossible de modifier le commentaire !');
 	}
 	else {
 		header('Location: index.php?action=moderate');

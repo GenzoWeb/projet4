@@ -56,4 +56,13 @@ class CommentManager extends Manager
         
         return $eraseComment;
     }
+
+    public function updateComment($id, $comment)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE comments SET comment = ?, reporting = 0 WHERE id = ?');
+        $rewriteComment = $req->execute(array($comment, $id));
+        
+        return $rewriteComment;
+    } 
 }

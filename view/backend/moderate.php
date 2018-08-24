@@ -6,22 +6,30 @@ $title = 'Administration'; ?>
 <p>Commentaires à modérer :</p>
 
 <?php
+if($moderate->rowCount()){ 
 while($commentAdmin = $moderate->fetch())
-{    
-?>
+    {    
+    ?>
 
-<p>
-    Le commentaire de <strong><?= $commentAdmin['author']?></strong> du <?= $commentAdmin['comment_date_fr']?> a été signalé <strong><?= $commentAdmin['reporting']?> fois</strong>.
-</p>
+    <p>
+        Le commentaire de <strong><?= $commentAdmin['author']?></strong> du <?= $commentAdmin['comment_date_fr']?> a été signalé <strong><?= $commentAdmin['reporting']?> fois</strong>.
+    </p>
 
-<p>
-    <?= nl2br(htmlspecialchars($commentAdmin['comment']))?>
-    <em>
-        <a href="index.php?action=deleteComment&id=<?=$commentAdmin['id']?>">Supprimer</a>
-    </em> 
-</p>  
+    <p>
+        <?= nl2br(htmlspecialchars($commentAdmin['comment']))?>
+            <em>
+                <a href="index.php?action=editComment&id=<?=$commentAdmin['id']?>">Modifier</a>
+            </em>
+            <em>
+                <a href="index.php?action=deleteComment&id=<?=$commentAdmin['id']?>">Supprimer</a>
+            </em> 
+    </p>  
 
-<?php
+    <?php
+    }
+}
+else{
+    echo '<p>Aucun commentaire à modérer.</p>';
 }
 
 $content = ob_get_clean();
