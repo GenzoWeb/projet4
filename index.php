@@ -36,6 +36,18 @@ try{
 	    	else{
 		        throw new Exception('Veuillez remplir tout les champs');
 		    }	
+	    }
+	   	elseif($_GET['action'] == 'report') {
+	    	if(isset($_GET['id']) && $_GET['id'] > 0){
+	    		if(isset($_GET['post_id']) && $_GET['post_id'] > 0){
+	    			if(isset($_GET['reporting']) && $_GET['reporting'] >= 0){
+	    				reportComment($_GET['id'], $_GET['post_id'], $_GET['reporting']);
+	    			}
+	    			else{
+	    				throw new Exception('Ce billet n\'existe pas');
+	    			}
+	    		}
+	    	}
 	    }	
 		elseif(isset($_SESSION['login'])){
 			if($_GET['action'] == 'login'){

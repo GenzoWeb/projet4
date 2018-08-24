@@ -39,6 +39,16 @@ while($comment = $comments->fetch())
 
 <p>
     <?= nl2br(htmlspecialchars($comment['comment']))?>
+    <?php 
+        if(!isset($_SESSION['login'])){
+    ?>  
+        <em>
+            <a class="rep" href="index.php?action=report&id=<?=$comment['id']?>&post_id=<?=$comment['post_id']?>&reporting=<?=$comment['reporting']?>">Signaler un abus</a>
+        </em> 
+
+    <?php   
+        }
+    ?>
 </p>  
 
 <?php
@@ -50,3 +60,5 @@ $content = ob_get_clean();
 
 require('template.php'); 
 ?>
+
+<script src="public/js/report.js"></script>
