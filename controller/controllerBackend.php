@@ -30,7 +30,7 @@ function addPost($title, $content)
 		throw new Exception('Impossible d\'ajouter le billet !');
 	}
 	else {
-		require('view/backend/admin.php');
+		require('view/frontend/listPostsView.php');
 	}
 }
 

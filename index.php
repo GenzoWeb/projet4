@@ -51,7 +51,6 @@ try{
 	    }	
 		elseif(isset($_SESSION['login'])){
 			if($_GET['action'] == 'login'){
-				require('view/backend/admin.php');
 				listPosts();
 			}
 			elseif($_GET['action'] == 'newPost'){

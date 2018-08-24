@@ -9,7 +9,7 @@ $title = 'Administration'; ?>
     </div>
     <div>
         <label for="content">Contenu</label><br />
-        <textarea id="content" name="content"></textarea>
+        <textarea id="mytextarea" name="content"></textarea>
     </div>
     <div>
         <input type="submit" id="submit" name="submit" value="Envoyer" />
