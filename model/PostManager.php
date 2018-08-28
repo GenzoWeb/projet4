@@ -3,10 +3,10 @@ require_once("model/Manager.php");
 
 class PostManager extends Manager
 {
-    public function getPosts()
+    public function getPosts($begin, $numberChapter)
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date_fr FROM posts ORDER BY id DESC');
+        $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date_fr FROM posts ORDER BY id DESC LIMIT ' . $begin . ' , ' . $numberChapter);
         
         return $req;
     }
@@ -47,4 +47,14 @@ class PostManager extends Manager
         
         return $erasePost;
     }
+
+    public function countPosts($numberChapter)
+    {
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT COUNT(*) AS nbPosts FROM posts');
+        $data = $req->fetch();
+        $nbPosts = $data['nbPosts'];
+
+        return $nbPosts;
+    } 
 }

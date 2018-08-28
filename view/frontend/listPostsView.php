@@ -5,6 +5,11 @@
 <p>Billets du blog</p>
 
 <?php
+echo 'Page : ';
+for($i = 1; $i <= $nbTotalPages ; $i++){
+    echo '<a href="index.php?page=' . $i . '">' . $i . '</a> ';
+}
+
 while($data = $posts->fetch())
 {
 ?>

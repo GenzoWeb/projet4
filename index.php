@@ -3,10 +3,13 @@ session_start();
 require('controller/controllerFrontend.php');
 require('controller/controllerBackend.php');
 
+$begin = 0;
+$chapterPerPage = 2;
+
 try{
 	if (isset($_GET['action'])) {
 	    if ($_GET['action'] == 'listPosts') {
-	        listPosts();
+	        listPosts($begin ,$chapterPerPage);
 	    }
 	    elseif ($_GET['action'] == 'post') {
 	        if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -48,10 +51,13 @@ try{
 	    			}
 	    		}
 	    	}
-	    }	
+	    }
+	    elseif($_GET['action'] == 'login'){
+			require('view/frontend/login.php');
+		}		
 		elseif(isset($_SESSION['login'])){
-			if($_GET['action'] == 'login'){
-				listPosts();
+			if($_GET['action'] == 'admin'){
+				listPosts($begin ,$chapterPerPage);
 			}
 			elseif($_GET['action'] == 'newPost'){
 				require('view/backend/addPost.php');
@@ -59,7 +65,7 @@ try{
 		    elseif($_GET['action'] == 'addPost'){
 		    	if (!empty($_POST['title']) && !empty($_POST['content'])){
 					addPost($_POST['title'], $_POST['content']);
-					listPosts();
+					listPosts($begin ,$chapterPerPage);
 				}
 				else{
 					throw new Exception('Tous les champs ne sont pas remplis !');
@@ -143,7 +149,7 @@ try{
 		        }
 		    }
 		    else{
-		     	throw new Exception('Aucun commentaires');
+		     	listPosts($begin ,$chapterPerPage);
 		    } 	
 		}
 		else{
@@ -151,12 +157,19 @@ try{
 				login($_POST['login']);
 			}
 			else{
-				require('view/frontend/login.php');
+				listPosts($begin ,$chapterPerPage);
 			}
 		}
 	}
+	elseif(isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0){
+ 			$_GET['page'] = intval($_GET['page']);
+ 			$currentPage = $_GET['page'];
+ 			$begin = ($currentPage - 1) * $chapterPerPage;
+
+ 			listPosts($begin ,$chapterPerPage);
+	}	
 	else {
-	    listPosts();
+	    listPosts($begin ,$chapterPerPage);
 	}
 }
 catch(Exception $e){

@@ -12,7 +12,7 @@ function login($login)
     if((htmlspecialchars($_POST['login']) == $admin['login']) && $isPasswordCorrect){
     	session_start();
     	$_SESSION['login'] = $admin['login'];
-    	header('Location: index.php?action=login');
+    	header('Location: index.php?action=admin');
     }
     else{
     	throw new Exception('Mauvais identifiant ou mauvais mot de passe');

@@ -3,12 +3,28 @@
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 
-function listPosts()
+function listPosts($begin, $numberChapter)
 {
 	$postManager = new PostManager();
-    $posts = $postManager->getPosts();
+	$numberPosts = $postManager->countPosts($numberChapter);
 
-    require('view/frontend/listPostsView.php');
+	$nbTotalPages = ceil($numberPosts / $numberChapter);
+
+	if(isset($_GET['page'])){
+	    if($_GET['page'] <= $nbTotalPages){
+	    	$start = $begin ;
+	    }
+	    else{
+	    	$start = 0 ;
+	    }
+	}    
+	else{
+		$start = 0;
+	}
+
+	$posts = $postManager->getPosts($start, $numberChapter);
+
+	require('view/frontend/listPostsView.php');
 }
 
 function post()
