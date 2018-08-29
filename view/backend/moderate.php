@@ -12,7 +12,7 @@ while($commentAdmin = $moderate->fetch())
     ?>
 
     <p>
-        Le commentaire de <strong><?= $commentAdmin['author']?></strong> du <?= $commentAdmin['comment_date_fr']?> a été signalé <strong><?= $commentAdmin['reporting']?> fois</strong>.
+        Le commentaire de <strong><?= htmlspecialchars($commentAdmin['author'])?></strong> du <?= $commentAdmin['comment_date_fr']?> a été signalé <strong><?= $commentAdmin['reporting']?> fois</strong>.
     </p>
 
     <p>

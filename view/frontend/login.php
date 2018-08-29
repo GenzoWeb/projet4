@@ -1,7 +1,7 @@
 <?php $title = "Connectez-vous" ?>
 
 <?php ob_start(); ?>
-<p><a href="index.php">Retour à la liste des billets</a></p>
+<p><a href="index.php">Retour à la liste des chapitres</a></p>
 
 <h2>Se connecter</h2>
 

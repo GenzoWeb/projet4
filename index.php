@@ -16,7 +16,7 @@ try{
 	            post();
 	        }
 	        else {
-	            throw new Exception('Aucun identifiant de billet envoyé');
+	            throw new Exception('Aucun identifiant de chapitre envoyé');
 	        }
 	    }
 	    elseif($_GET['action'] == 'addComment') {
@@ -29,7 +29,7 @@ try{
 	    		}
 	    	}
 	    	else{
-	    		throw new Exception('Aucun identifiant de billet envoyé');
+	    		throw new Exception('Aucun identifiant de chapitre envoyé');
 	    	}
 	    }
 	    elseif(isset($_POST['submitAdmin'])){
@@ -47,12 +47,12 @@ try{
 	    				reportComment($_GET['id'], $_GET['post_id'], $_GET['reporting']);
 	    			}
 	    			else{
-	    				throw new Exception('Ce billet n\'existe pas');
+	    				throw new Exception('Ce chapitre n\'existe pas');
 	    			}
 	    		}
 	    	}
 	    }
-	    elseif($_GET['action'] == 'login'){
+	    elseif($_GET['action'] == 'login' && (!isset($_SESSION['login']))){
 			require('view/frontend/login.php');
 		}		
 		elseif(isset($_SESSION['login'])){
@@ -76,7 +76,7 @@ try{
 		            postAdmin();
 		        }
 		        else {
-		            throw new Exception('Aucun identifiant de billet envoyé');
+		            throw new Exception('Aucun identifiant de chapitre envoyé');
 		        }
 		    }
 		    elseif ($_GET['action'] == 'update') {
@@ -89,7 +89,7 @@ try{
 	    			}
 		        }
 		        else {
-		            throw new Exception('Aucun identifiant de billet envoyé');
+		            throw new Exception('Aucun identifiant de chapitre envoyé');
 		        }
 		    }
 		    elseif ($_GET['action'] == 'deletePost') {
@@ -97,7 +97,7 @@ try{
 		            postAdmin();
 		        }
 		        else {
-		            throw new Exception('Aucun identifiant de billet envoyé');
+		            throw new Exception('Aucun identifiant de chapitre envoyé');
 		        }
 		    }
 		    elseif ($_GET['action'] == 'remove'){
@@ -105,7 +105,7 @@ try{
 		     		removePost($_GET['id']);
 		     	}
 		     	else{
-		     		throw new Exception('Aucun identifiant de billet envoyé');
+		     		throw new Exception('Aucun identifiant de chapitre envoyé');
 		     	}   
 		    }
 		    elseif ($_GET['action'] == 'moderate'){
@@ -116,7 +116,7 @@ try{
 		            comment();
 		        }
 		        else {
-		            throw new Exception('Aucun identifiant de billet envoyé');
+		            throw new Exception('Aucun identifiant de chapitre envoyé');
 		        }
 		    }
 		    elseif ($_GET['action'] == 'removeComment'){
@@ -124,7 +124,7 @@ try{
 		     		removeComment($_GET['id']);
 		     	}
 		     	else{
-		     		throw new Exception('Aucun identifiant de billet envoyé');
+		     		throw new Exception('Aucun identifiant de chapitre envoyé');
 		     	}   
 		    }
 		    elseif ($_GET['action'] == 'editComment'){
@@ -132,7 +132,7 @@ try{
 		    		comment();
 		    	}
 		    	else {
-		            throw new Exception('Aucun identifiant de billet envoyé');
+		            throw new Exception('Aucun identifiant de chapitre envoyé');
 		        }
 		    }	
 		    elseif ($_GET['action'] == 'updateComment'){
@@ -145,7 +145,7 @@ try{
 	    			}
 		        }
 		        else {
-		            throw new Exception('Aucun identifiant de billet envoyé');
+		            throw new Exception('Aucun identifiant de chapitre envoyé');
 		        }
 		    }
 		    else{
@@ -157,16 +157,16 @@ try{
 				login($_POST['login']);
 			}
 			else{
-				listPosts($begin ,$chapterPerPage);
+				require('view/frontend/login.php');
 			}
 		}
 	}
 	elseif(isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0){
- 			$_GET['page'] = intval($_GET['page']);
- 			$currentPage = $_GET['page'];
- 			$begin = ($currentPage - 1) * $chapterPerPage;
+		$_GET['page'] = intval($_GET['page']);
+		$currentPage = $_GET['page'];
+		$begin = ($currentPage - 1) * $chapterPerPage;
 
- 			listPosts($begin ,$chapterPerPage);
+		listPosts($begin ,$chapterPerPage);
 	}	
 	else {
 	    listPosts($begin ,$chapterPerPage);

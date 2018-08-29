@@ -17,8 +17,6 @@ function login($login)
     else{
     	throw new Exception('Mauvais identifiant ou mauvais mot de passe');
     }
-
-    require('view/frontend/login.php');
 }
 
 function addPost($title, $content)
@@ -27,10 +25,10 @@ function addPost($title, $content)
 	$newPost = $postManager->createPost($title, $content);
 
 	if($newPost === false){
-		throw new Exception('Impossible d\'ajouter le billet !');
+		throw new Exception('Impossible d\'ajouter le chapitre !');
 	}
 	else {
-		require('view/frontend/listPostsView.php');
+		header('Location: index.php?action=admin');
 	}
 }
 
@@ -53,10 +51,10 @@ function editPost($postId, $title, $content)
 	$rewritePost = $postManager->updatePost($postId, $title, $content);
 
 	if($rewritePost === false){
-		throw new Exception('Impossible de modifier le billet !');
+		throw new Exception('Impossible de modifier le chapitre !');
 	}
 	else {
-		header('Location: index.php?action=editPost&id=' . $postId);
+		header('Location: index.php?action=admin');
 	}	
 }
 
@@ -66,10 +64,10 @@ function removePost($postId)
 	$erasePost = $postManager->deletePost($postId);
 
 	if($erasePost === false){
-		throw new Exception('Impossible de supprimer le billet !');
+		throw new Exception('Impossible de supprimer le chapitre !');
 	}
 	else {
-		header('Location: index.php?action=login');
+		header('Location: index.php?action=admin');
 	}	
 }
 

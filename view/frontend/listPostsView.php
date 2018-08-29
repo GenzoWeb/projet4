@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 <h1>BLOG</h1>
-<p>Billets du blog</p>
+<p>Chapitres du blog</p>
 
 <?php
 echo 'Page : ';

@@ -3,11 +3,15 @@ require_once("model/Manager.php");
 
 class PostManager extends Manager
 {
-    public function getPosts($begin, $numberChapter)
+    public function getPosts($start, $numberChapter)
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date_fr FROM posts ORDER BY id DESC LIMIT ' . $begin . ' , ' . $numberChapter);
-        
+        $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date_fr FROM posts ORDER BY id DESC LIMIT :start, :numberChapter');
+
+        $req->bindValue(':start', $start, PDO::PARAM_INT);
+        $req->bindValue(':numberChapter', $numberChapter, PDO::PARAM_INT);
+        $req->execute();
+
         return $req;
     }
 
