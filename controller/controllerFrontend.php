@@ -35,7 +35,12 @@ function post()
     $post = $postManager->getPost($_GET['id']);
     $comments = $commentManager->getComments($_GET['id']);
 
-    require('view/frontend/postView.php');
+    if($post === false){
+    	throw new Exception('Ce chapitre n\'existe pas');
+    }
+    else {
+		require('view/frontend/postView.php');
+	}
 }
 
 function addcomment($postId, $author, $comment)

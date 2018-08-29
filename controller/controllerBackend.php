@@ -37,12 +37,15 @@ function postAdmin()
 	$postManager = new PostManager();
     $postAdmin = $postManager->getPost($_GET['id']);
 
-    if($_GET['action'] == 'editPost'){
+    if($postAdmin === false){
+		throw new Exception('Ce chapitre n\'existe pas !');
+	}
+	elseif($_GET['action'] == 'editPost'){
     	require('view/backend/editPost.php');
     }
-    if($_GET['action'] == 'deletePost'){
+    elseif($_GET['action'] == 'deletePost'){
     	require('view/backend/deletePost.php');
-    }
+    }	
 }
 
 function editPost($postId, $title, $content)
