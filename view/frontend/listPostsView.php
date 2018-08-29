@@ -17,10 +17,17 @@ while($data = $posts->fetch())
 <h3>
 	<?= htmlspecialchars($data['title'])?> le <?= $data['creation_date_fr']?>
 	<?php 
-		if(isset($_SESSION['login'])){
+	if(isset($_GET['page'])){
+		$page = $_GET['page'];
+	}
+	else{
+		$page = 1;
+	}
+	
+	if(isset($_SESSION['login'])){
 	?>	
 		<em>
-			<a href="index.php?action=editPost&id=<?=$data['id']?>">Modifier</a>
+			<a href="index.php?action=editPost&id=<?=$data['id']?>&page=<?=$page?>">Modifier</a>
 		</em>
 		<em>
 			<a href="index.php?action=deletePost&id=<?=$data['id']?>">Supprimer</a>

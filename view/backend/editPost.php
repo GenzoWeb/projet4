@@ -2,7 +2,7 @@
 $title = 'Administration'; ?>
 
 <?php ob_start(); ?>
-<form action="index.php?action=update&id=<?= $postAdmin['id']?>" method="post">
+<form action="index.php?action=update&id=<?= $postAdmin['id']?>&page=<?= $_GET['page']?>" method="post">
     <div>
         <label for="title">Titre</label><br />
         <input type="text" id="title" name="title" value="<?= htmlspecialchars($postAdmin['title'])?>"/>

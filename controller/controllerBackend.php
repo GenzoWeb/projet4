@@ -54,7 +54,7 @@ function editPost($postId, $title, $content)
 		throw new Exception('Impossible de modifier le chapitre !');
 	}
 	else {
-		header('Location: index.php?action=admin');
+		header('Location: index.php?page=' . $_GET['page']);
 	}	
 }
 
