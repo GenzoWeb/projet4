@@ -6,8 +6,20 @@
 
 <?php
 echo 'Page : ';
+if(!isset($_GET['page'])){
+	$page = 1;
+}
+else{
+	$page = $_GET['page'];
+}
+
 for($i = 1; $i <= $nbTotalPages ; $i++){
+	if($i == $page){
+		echo $i . ' ';
+	}
+	else{
     echo '<a href="index.php?page=' . $i . '">' . $i . '</a> ';
+	}
 }
 
 while($data = $posts->fetch())
