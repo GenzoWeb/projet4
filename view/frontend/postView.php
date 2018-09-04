@@ -29,28 +29,34 @@
 </form>
 
 <?php
+if($comments->rowCount()){
 while($comment = $comments->fetch())
-{    
-?>
-
-<p>
-    <strong><?= htmlspecialchars($comment['author'])?></strong> le <?= $comment['comment_date_fr']?>
-</p>
-
-<p>
-    <?= nl2br(htmlspecialchars($comment['comment']))?>
-    <?php 
-        if(!isset($_SESSION['login'])){
-    ?>  
-        <em>
-            <a class="rep" href="index.php?action=report&id=<?=$comment['id']?>&post_id=<?=$comment['post_id']?>&reporting=<?=$comment['reporting']?>">Signaler un abus</a>
-        </em> 
-
-    <?php   
-        }
+    {    
     ?>
-</p>  
 
+    <p>
+        <strong><?= htmlspecialchars($comment['author'])?></strong> le <?= $comment['comment_date_fr']?>
+    </p>
+
+    <p>
+        <?= nl2br(htmlspecialchars($comment['comment']))?>
+        <?php 
+            if(!isset($_SESSION['login'])){
+        ?>  
+            <em>
+                <a class="rep" href="index.php?action=report&id=<?=$comment['id']?>&post_id=<?=$comment['post_id']?>&reporting=<?=$comment['reporting']?>">Signaler un abus</a>
+            </em> 
+
+        <?php   
+            }
+        ?>
+    </p>  
+
+    <?php
+    }
+}
+else{?>
+    <p>Il n'y a aucun commentaire!</p>
 <?php
 }
 

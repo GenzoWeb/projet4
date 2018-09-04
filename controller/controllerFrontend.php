@@ -38,6 +38,12 @@ function post()
     if($post === false){
     	throw new Exception('Ce chapitre n\'existe pas');
     }
+    elseif($_GET['action'] == 'editPost'){
+    	require('view/backend/editPost.php');
+    }
+    elseif($_GET['action'] == 'deletePost'){
+    	require('view/backend/deletePost.php');
+    }	
     else {
 		require('view/frontend/postView.php');
 	}

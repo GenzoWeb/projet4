@@ -71,7 +71,7 @@ try{
 					throw new Exception('Tous les champs ne sont pas remplis !');
 				}
 		    }
-		    elseif ($_GET['action'] == 'editPost') {
+		    elseif ($_GET['action'] == 'editPost' || $_GET['action'] == 'deletePost') {
 		        if (isset($_GET['id']) && $_GET['id'] > 0) {
 		            postAdmin();
 		        }
@@ -87,14 +87,6 @@ try{
 		            else{
 	    				throw new Exception('Tous les champs ne sont pas remplis !');
 	    			}
-		        }
-		        else {
-		            throw new Exception('Aucun identifiant de chapitre envoyé');
-		        }
-		    }
-		    elseif ($_GET['action'] == 'deletePost') {
-		        if (isset($_GET['id']) && $_GET['id'] > 0) {
-		            postAdmin();
 		        }
 		        else {
 		            throw new Exception('Aucun identifiant de chapitre envoyé');

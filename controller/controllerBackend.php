@@ -37,16 +37,14 @@ function postAdmin()
 	$postManager = new PostManager();
     $postAdmin = $postManager->getPost($_GET['id']);
 
-    if($postAdmin === false){
-		throw new Exception('Ce chapitre n\'existe pas !');
-	}
-	elseif($_GET['action'] == 'editPost'){
+    if($_GET['action'] == 'editPost'){
     	require('view/backend/editPost.php');
     }
-    elseif($_GET['action'] == 'deletePost'){
+    if($_GET['action'] == 'deletePost'){
     	require('view/backend/deletePost.php');
-    }	
+    }
 }
+
 
 function editPost($postId, $title, $content)
 {
@@ -87,10 +85,13 @@ function comment()
 	$commentManager = new CommentManager();
     $comment = $commentManager->getComment($_GET['id']);
 
-    if($_GET['action'] == 'editComment'){
+    if($comment === false){
+		throw new Exception('Ce commentaire n\'existe pas !');
+	}
+    elseif($_GET['action'] == 'editComment'){
     	require('view/backend/editComment.php');
 	}
-	if($_GET['action'] == 'deleteComment'){
+	elseif($_GET['action'] == 'deleteComment'){
     	require('view/backend/deleteComment.php');
 	}
 }

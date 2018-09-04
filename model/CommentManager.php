@@ -64,5 +64,5 @@ class CommentManager extends Manager
         $rewriteComment = $req->execute(array($comment, $id));
         
         return $rewriteComment;
-    } 
+    }
 }
