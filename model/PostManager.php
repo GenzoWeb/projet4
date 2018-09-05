@@ -6,7 +6,7 @@ class PostManager extends Manager
     public function getPosts($start, $numberChapter)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date_fr FROM posts ORDER BY id DESC LIMIT :start, :numberChapter');
+        $req = $db->prepare('SELECT posts.id AS id, posts.title AS title, posts.content AS content, DATE_FORMAT(posts.creation_date, \'%d/%m/%Y\') AS creation_date_fr, COUNT(comments.post_id) AS nb FROM posts  LEFT JOIN comments ON posts.id=comments.post_id GROUP BY posts.id DESC LIMIT :start, :numberChapter');
 
         $req->bindValue(':start', $start, PDO::PARAM_INT);
         $req->bindValue(':numberChapter', $numberChapter, PDO::PARAM_INT);

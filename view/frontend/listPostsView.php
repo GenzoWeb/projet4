@@ -53,7 +53,23 @@ while($data = $posts->fetch())
 	<?= $data['content']?>
 	<br />
 	<em>
-		<a href="index.php?action=post&id=<?=$data['id']?>">Commentaires</a>
+		<?php
+		if($data['nb'] == 0){
+		?>
+			<a href="index.php?action=post&id=<?=$data['id']?>">Aucun commentaire</a>
+		<?php	
+		}
+		elseif($data['nb'] == 1){
+		?>
+			<a href="index.php?action=post&id=<?=$data['id']?>"><?=$data['nb'] ?> commentaire</a>
+		<?php
+		}
+		else{
+		?>
+			<a href="index.php?action=post&id=<?=$data['id']?>"><?=$data['nb'] ?> commentaires</a>
+		<?php	
+		}
+		?>
 	</em>
 </p>
 
