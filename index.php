@@ -142,7 +142,10 @@ try{
 		    }
 		    else{
 		     	listPosts($begin ,$chapterPerPage);
-		    } 	
+		    }
+		    if($_GET['action'] == 'logout'){
+		    	logout();
+		    }  	
 		}
 		else{
 			if(isset($_POST['login'])){
