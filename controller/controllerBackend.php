@@ -21,14 +21,19 @@ function login($login)
 
 function addPost($title, $content)
 {
-	$postManager = new PostManager();
-	$newPost = $postManager->createPost($title, $content);
+	if(trim($title) && trim($content)){
+		$postManager = new PostManager();
+		$newPost = $postManager->createPost($title, $content);
 
-	if($newPost === false){
-		throw new Exception('Impossible d\'ajouter le chapitre !');
+		if($newPost === false){
+			throw new Exception('Impossible d\'ajouter le chapitre !');
+		}
+		else {
+			header('Location: index.php?action=admin');
+		}
 	}
-	else {
-		header('Location: index.php?action=admin');
+	else{
+		throw new Exception('Impossible d\'ajouter le chapitre !');
 	}
 }
 
@@ -45,18 +50,22 @@ function postAdmin()
     }
 }
 
-
 function editPost($postId, $title, $content)
 {
-	$postManager = new PostManager();
-	$rewritePost = $postManager->updatePost($postId, $title, $content);
+	if(trim($title) && trim($content)){
+		$postManager = new PostManager();
+		$rewritePost = $postManager->updatePost($postId, $title, $content);
 
-	if($rewritePost === false){
-		throw new Exception('Impossible de modifier le chapitre !');
+		if($rewritePost === false){
+			throw new Exception('Impossible de modifier le chapitre !');
+		}
+		else {
+			header('Location: index.php?page=' . $_GET['page']);
+		}
 	}
-	else {
-		header('Location: index.php?page=' . $_GET['page']);
-	}	
+	else{
+		throw new Exception('Impossible de modifier le chapitre !');
+	}			
 }
 
 function removePost($postId)

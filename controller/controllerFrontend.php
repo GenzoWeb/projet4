@@ -15,7 +15,7 @@ function listPosts($begin, $numberChapter)
 	    	$start = $begin ;
 	    }
 	    else{
-	    	$start = 0 ;
+	    	header('Location: index.php?page=1');
 	    }
 	}    
 	else{
@@ -51,15 +51,19 @@ function post()
 
 function addcomment($postId, $author, $comment)
 {
-	$commentManager = new CommentManager();
-	
-	$newComment = $commentManager->postComment($postId, $author, $comment);
+	if(trim($author) && trim($comment)){
+		$commentManager = new CommentManager();	
+		$newComment = $commentManager->postComment($postId, $author, $comment);
 
-	if($newComment === false){
-		throw new Exception('Impossible d\'ajouter le commentaire !');
+		if($newComment === false){
+			throw new Exception('Impossible d\'ajouter le commentaire !');
+		}
+		else {
+			header('Location: index.php?action=post&id=' . $postId);
+		}
 	}
-	else {
-		header('Location: index.php?action=post&id=' . $postId);
+	else{
+		throw new Exception('Impossible d\'ajouter le commentaire !');
 	}
 }
 

@@ -5,7 +5,7 @@ $title = 'Administration'; ?>
 <form action="index.php?action=updateComment&id=<?= $comment['id']?>" method="post">
     <div>
         <label for="comment">Commentaire</label><br />
-        <textarea id="mytextarea" name="comment"><?= $comment['comment']?></textarea>
+        <textarea name="comment"><?= $comment['comment']?></textarea>
     </div>
     <div>
         <input type="submit" id="submit" name="submit" value="Envoyer" />
