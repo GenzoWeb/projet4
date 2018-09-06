@@ -4,7 +4,7 @@ $title = 'Administration'; ?>
 <?php ob_start(); ?>
 <p>Etes vous sur de vouloir supprimer ce chapitre?</p>
 
-<p>Titre du chapitre : <?= $postAdmin['title'] ?></p>
+<p>Titre du chapitre : <?= htmlspecialchars($postAdmin['title']) ?></p>
 <p><?= $postAdmin['content'] ?></p>
 
 <p><a href="index.php?action=remove&id=<?= $postAdmin['id']?>">OUI</a></p>

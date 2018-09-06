@@ -9,31 +9,26 @@ function login($login)
     $admin = $loginManager->getUser($login);
 
     $isPasswordCorrect = password_verify($_POST['pass'], $admin['pass']);
-    if((htmlspecialchars($_POST['login']) == $admin['login']) && $isPasswordCorrect){
-    	session_start();
+    if(($_POST['login'] == $admin['login']) && $isPasswordCorrect){
     	$_SESSION['login'] = $admin['login'];
     	header('Location: index.php?action=admin');
     }
     else{
-    	throw new Exception('Mauvais identifiant ou mauvais mot de passe');
+    	$_SESSION['erreur'] = 'Mauvais identifiant ou mauvais mot de passe';
+    	require('view/frontend/login.php');
     }
 }
 
 function addPost($title, $content)
 {
-	if(trim($title) && trim($content)){
-		$postManager = new PostManager();
-		$newPost = $postManager->createPost($title, $content);
+	$postManager = new PostManager();
+	$newPost = $postManager->createPost($title, $content);
 
-		if($newPost === false){
-			throw new Exception('Impossible d\'ajouter le chapitre !');
-		}
-		else {
-			header('Location: index.php?action=admin');
-		}
-	}
-	else{
+	if($newPost === false){
 		throw new Exception('Impossible d\'ajouter le chapitre !');
+	}
+	else {
+		header('Location: index.php?action=admin');
 	}
 }
 
@@ -50,28 +45,23 @@ function postAdmin()
     }
 }
 
-function editPost($postId, $title, $content)
-{
-	if(trim($title) && trim($content)){
-		$postManager = new PostManager();
-		$rewritePost = $postManager->updatePost($postId, $title, $content);
-
-		if($rewritePost === false){
-			throw new Exception('Impossible de modifier le chapitre !');
-		}
-		else {
-			header('Location: index.php?page=' . $_GET['page']);
-		}
-	}
-	else{
-		throw new Exception('Impossible de modifier le chapitre !');
-	}			
-}
-
-function removePost($postId)
+function editPost($id, $title, $content)
 {
 	$postManager = new PostManager();
-	$erasePost = $postManager->deletePost($postId);
+	$rewritePost = $postManager->updatePost($id, $title, $content);
+
+	if($rewritePost === false){
+		throw new Exception('Impossible de modifier le chapitre !');
+	}
+	else {
+		header('Location: index.php?page=' . $_GET['page']);
+	}		
+}
+
+function removePost($id)
+{
+	$postManager = new PostManager();
+	$erasePost = $postManager->deletePost($id);
 
 	if($erasePost === false){
 		throw new Exception('Impossible de supprimer le chapitre !');

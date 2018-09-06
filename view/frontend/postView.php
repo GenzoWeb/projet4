@@ -29,17 +29,21 @@
 </form>
 
 <?php
+if(isset($_SESSION['erreur'])){
+    echo $_SESSION['erreur'];
+}
+
 if($comments->rowCount()){
 while($comment = $comments->fetch())
     {    
     ?>
 
     <p>
-        <strong><?= htmlspecialchars($comment['author'])?></strong> le <?= $comment['comment_date_fr']?>
+        <strong><?= strip_tags($comment['author'])?></strong> le <?= $comment['comment_date_fr']?>
     </p>
 
     <p>
-        <?= nl2br(htmlspecialchars($comment['comment']))?>
+        <?= nl2br(strip_tags($comment['comment']))?>
         <?php 
             if(!isset($_SESSION['login'])){
         ?>  

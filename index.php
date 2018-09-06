@@ -21,11 +21,12 @@ try{
 	    }
 	    elseif($_GET['action'] == 'addComment') {
 	    	if(isset($_GET['id']) && $_GET['id'] > 0){
-	    		if (!empty($_POST['author']) && !empty($_POST['comment'])){
+	    		if (trim($_POST['author']) && trim($_POST['comment'])){
 	    			addComment($_GET['id'], $_POST['author'], $_POST['comment']);
 	    		}
 	    		else{
-	    			throw new Exception('Tous les champs ne sont pas remplis !');
+	    			$_SESSION['erreur'] = 'Veuillez remplir tout les champs';
+	    			header('Location: index.php?action=post&id=' . $_GET['id']);
 	    		}
 	    	}
 	    	else{
@@ -33,11 +34,12 @@ try{
 	    	}
 	    }
 	    elseif(isset($_POST['submitAdmin'])){
-	    	if(!empty($_POST['login']) && !empty($_POST['pass'])){ 
+	    	if(trim($_POST['login']) && trim($_POST['pass'])){ 
 	    		login($_POST['login']);
 	    	}
 	    	else{
-		        throw new Exception('Veuillez remplir tout les champs');
+		        $_SESSION['erreur'] = 'Veuillez remplir tout les champs';
+		        require('view/frontend/login.php');
 		    }	
 	    }
 	   	elseif($_GET['action'] == 'report') {
@@ -63,12 +65,13 @@ try{
 				require('view/backend/addPost.php');
 			}
 		    elseif($_GET['action'] == 'addPost'){
-		    	if (!empty($_POST['title']) && !empty($_POST['content'])){
+		    	if (trim($_POST['title']) && trim($_POST['content'])){
 					addPost($_POST['title'], $_POST['content']);
 					listPosts($begin ,$chapterPerPage);
 				}
 				else{
-					throw new Exception('Tous les champs ne sont pas remplis !');
+					$_SESSION['erreur'] = 'Tous les champs ne sont pas remplis !';
+					require('view/backend/addPost.php');
 				}
 		    }
 		    elseif ($_GET['action'] == 'editPost' || $_GET['action'] == 'deletePost') {
@@ -81,11 +84,12 @@ try{
 		    }
 		    elseif ($_GET['action'] == 'update') {
 		        if (isset($_GET['id']) && $_GET['id'] > 0) {
-		        	if (!empty($_POST['title']) && !empty($_POST['content'])){
+		        	if (trim($_POST['title']) && trim($_POST['content'])){
 		            	editPost($_GET['id'], $_POST['title'], $_POST['content']);
 		            }
 		            else{
-	    				throw new Exception('Tous les champs ne sont pas remplis !');
+	    				$_SESSION['erreur'] = 'Tous les champs ne sont pas remplis !';
+	    				header('Location: index.php?action=editPost&id=' . $_GET['id'] . '&page=' . $_GET['page']);
 	    			}
 		        }
 		        else {
@@ -129,11 +133,12 @@ try{
 		    }	
 		    elseif ($_GET['action'] == 'updateComment'){
 		    	if (isset($_GET['id']) && $_GET['id'] > 0) {
-		    		if (!empty($_POST['comment'])){
+		    		if (trim($_POST['comment'])){
 		    			editComment($_GET['id'], $_POST['comment']);
 		     		}
 		     		else{
-	    				throw new Exception('Tous les champs ne sont pas remplis !');
+	    				$_SESSION['erreur'] = 'Tous les champs ne sont pas remplis !';
+	    				header('Location: index.php?action=editComment&id=' . $_GET['id']);	  
 	    			}
 		        }
 		        else {

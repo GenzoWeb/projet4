@@ -21,11 +21,11 @@ class CommentManager extends Manager
         return $newComment;
     } 
 
-    public function updateReporting($postId, $reporting)
+    public function updateReporting($id, $reporting)
     {
         $db = $this->dbConnect();
         $req = $db->prepare('UPDATE comments SET reporting = ? + 1 WHERE id = ?');
-        $report = $req->execute(array($reporting, $postId));
+        $report = $req->execute(array($reporting, $id));
         
         return $report;
     }   

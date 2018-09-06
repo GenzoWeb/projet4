@@ -51,19 +51,14 @@ function post()
 
 function addcomment($postId, $author, $comment)
 {
-	if(trim($author) && trim($comment)){
-		$commentManager = new CommentManager();	
-		$newComment = $commentManager->postComment($postId, $author, $comment);
+	$commentManager = new CommentManager();	
+	$newComment = $commentManager->postComment($postId, $author, $comment);
 
-		if($newComment === false){
-			throw new Exception('Impossible d\'ajouter le commentaire !');
-		}
-		else {
-			header('Location: index.php?action=post&id=' . $postId);
-		}
-	}
-	else{
+	if($newComment === false){
 		throw new Exception('Impossible d\'ajouter le commentaire !');
+	}
+	else {
+		header('Location: index.php?action=post&id=' . $postId);
 	}
 }
 

@@ -15,11 +15,11 @@ class PostManager extends Manager
         return $req;
     }
 
-    public function getPost($postId)
+    public function getPost($id)
     {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date_fr FROM posts WHERE id = ?');
-        $req->execute(array($postId));
+        $req->execute(array($id));
         $post = $req->fetch();
 
         return $post;
@@ -34,20 +34,20 @@ class PostManager extends Manager
         return $newPost;
     }
 
-    public function updatePost($postId, $title, $content)
+    public function updatePost($id, $title, $content)
     {
         $db = $this->dbConnect();
         $req = $db->prepare('UPDATE posts SET title = ?, content = ? WHERE id = ?');
-        $rewritePost = $req->execute(array($title, $content, $postId));
+        $rewritePost = $req->execute(array($title, $content, $id));
         
         return $rewritePost;
     }
 
-    public function deletePost($postId)
+    public function deletePost($id)
     {
         $db = $this->dbConnect();
         $req = $db->prepare('DELETE posts, comments FROM posts LEFT JOIN comments ON posts.id = comments.post_id WHERE posts.id = ?');
-        $erasePost = $req->execute(array($postId));
+        $erasePost = $req->execute(array($id));
         
         return $erasePost;
     }

@@ -12,11 +12,11 @@ while($commentAdmin = $moderate->fetch())
     ?>
 
     <p>
-        Le commentaire de <strong><?= htmlspecialchars($commentAdmin['author'])?></strong> du <?= $commentAdmin['comment_date_fr']?> a été signalé <strong><?= $commentAdmin['reporting']?> fois</strong>.
+        Le commentaire de <strong><?= strip_tags($commentAdmin['author'])?></strong> du <?= $commentAdmin['comment_date_fr']?> a été signalé <strong><?= $commentAdmin['reporting']?> fois</strong>.
     </p>
 
     <p>
-        <?= nl2br(htmlspecialchars($commentAdmin['comment']))?>
+        <?= nl2br(strip_tags($commentAdmin['comment']))?>
             <em>
                 <a href="index.php?action=editComment&id=<?=$commentAdmin['id']?>">Modifier</a>
             </em>
@@ -31,6 +31,8 @@ while($commentAdmin = $moderate->fetch())
 else{
     echo '<p>Aucun commentaire à modérer.</p>';
 }
+
+$moderate->closeCursor();
 
 $content = ob_get_clean();
 

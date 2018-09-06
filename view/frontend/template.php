@@ -1,3 +1,7 @@
+<?php 
+    unset($_SESSION['erreur']);
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>

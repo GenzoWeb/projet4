@@ -20,6 +20,9 @@
 </form>
 
 <?php
+if(isset($_SESSION['erreur'])){
+    echo $_SESSION['erreur'];
+}
 
 $content = ob_get_clean(); 
 
