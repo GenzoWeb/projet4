@@ -24,6 +24,10 @@ for($i = 1; $i <= $nbTotalPages ; $i++){
 
 while($data = $posts->fetch())
 {
+	$numberCharacters = strlen($data['content']);
+	$string = $data['content'];
+	$text = substr($string, 0, 150);
+	$text = substr($text, 0, strrpos($text, ' '));
 ?>
 
 <h3>
@@ -50,7 +54,15 @@ while($data = $posts->fetch())
 </h3>
 
 <p>
-	<?= $data['content']?>
+	<?php
+		if($numberCharacters < 300){
+			echo $string;
+		}
+		else{
+		echo $text;?> ... <a href="index.php?action=post&id=<?=$data['id']?>">lire la suite</a>
+		<?php
+		}
+	?>
 	<br />
 	<em>
 		<?php
