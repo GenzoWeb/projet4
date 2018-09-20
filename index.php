@@ -54,6 +54,9 @@ try{
 	    		}
 	    	}
 	    }
+	    elseif($_GET['action'] == 'error') {
+	    	require('view/frontend/404.php');
+	    }
 	    elseif($_GET['action'] == 'login' && (!isset($_SESSION['login']))){
 			require('view/frontend/login.php');
 		}		
@@ -107,6 +110,9 @@ try{
 		    elseif ($_GET['action'] == 'moderate'){
 		     	moderateComments();  
 		    }
+		    elseif($_GET['action'] == 'logout'){
+		    	logout();
+		    } 
 		    elseif ($_GET['action'] == 'deleteComment') {
 		        if (isset($_GET['id']) && $_GET['id'] > 0) {
 		            comment();
@@ -147,10 +153,7 @@ try{
 		    }
 		    else{
 		     	listPosts($begin ,$chapterPerPage);
-		    }
-		    if($_GET['action'] == 'logout'){
-		    	logout();
-		    }  	
+		    } 	
 		}
 		else{
 			if(isset($_POST['login'])){
