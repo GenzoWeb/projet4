@@ -1,6 +1,6 @@
-var report = document.querySelectorAll(".rep");
+var report = document.querySelectorAll("#report-com");
 window.addEventListener("load",function(){
-	var myFunction = function() {
+	var myFunction = function(){
 		alert("Vous venez de signaler un message.");
 	};  
  

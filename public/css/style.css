@@ -1,0 +1,466 @@
+a
+{
+	text-decoration: none !important;
+}
+
+label
+{
+	font-size: 1.4em;
+}
+
+/****************************************************template.php****************************************************/
+
+#menu
+{
+	background-color: #1874CD;
+	border-radius: 	inherit;
+	margin-bottom: 0;
+}
+
+#menu-bar, #text-menu-admin, #confirm-delete
+{
+	margin: 0;
+}
+
+#text-menu-admin, #list-admin a, #menu-user a, #title-post2:hover, #modif-post, #clear-post, #read-more, #link-com:hover, #return:hover
+{
+	color: black;
+}
+
+#menu-bar li a:hover
+{
+	background-color: white;
+}
+
+#menu-admin, #menu-user
+{
+	margin-bottom: 0;
+}
+
+#menu-admin, #form-comment button, #form-login button, #add-post-button button, #edit-post-button button, #form-edit-comment button, #button-page-error
+{
+	background-color: #1874CD;
+	border-color: #1874CD;
+}
+
+.glyphicon-home
+{
+	margin-right: 10px;
+}
+
+#list-admin, .text-home, .bio, #pagination, .title-post2
+{
+	text-align: center;
+}
+
+#logo
+{
+	font-family: 'Yesteryear';
+	font-size: 2em;
+	color: black;
+	margin-bottom: 0;
+}
+
+#logo, #admin-link
+{
+	line-height: 50px;
+}
+
+#admin-link:hover, #title-post2 , #modif-post:hover, #clear-post:hover, #read-more:hover, #link-com
+{
+	color: white;
+}
+
+#admin-link
+{
+	margin-right: 15px;
+}
+
+#link-menu-user
+{
+	margin: 0;
+	text-align: center;
+}
+
+.footer
+{
+	width: 100%;
+	min-height: 60px;
+	background-color: #D9EDF7;
+	padding-top: 20px;
+}
+
+#link-footer
+{
+	margin-right: 30px;
+}
+
+/****************************************************home.php****************************************************/
+
+#home
+{
+	min-height: calc(100vh - 110px);
+}
+
+.image-home
+{
+	width: 100%;
+	height: 100%;
+}
+
+.t-home, .t-home-admin
+{
+	position: absolute;
+    padding: 0px;
+    width: 420px;
+    left: 50%;
+    right: 50%;
+    margin-left: -210px;
+    top: 100px;
+    background-color: rgba(255, 255, 255, 0.2);
+	color: black;
+    border-radius: 25px;
+    z-index: 500;
+}
+
+.t-home:hover, .t-home-admin:hover
+{
+	background-color: rgba(0, 0, 0, 0.2);
+	color: white;
+}
+
+#link-home
+{
+	color: white;
+	text-decoration: none;
+}
+
+#biography
+{
+	margin-top: 10px;
+}
+
+#image-bio
+{
+	width: 200px;
+	height: auto;
+}
+
+/****************************************************listPostsView.php****************************************************/
+
+#banner
+{
+	padding: 0;
+}
+
+.image
+{
+	width: 100%;
+	height: auto;
+}
+
+#list-posts
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	min-height: calc(100vh - 110px);
+}
+
+#posts
+{
+	background-color: #1874CD;
+	color: white;
+	border-radius: 25px;
+	margin-bottom: 10px;
+	margin-right: 0;
+	margin-left: 0;
+}
+
+#resume-post
+{
+	margin: 0 15px 15px;
+}
+
+.title-post
+{
+	margin-top: 10px;
+	font-size: 1.3em;
+}
+
+#link-page, #link-activ
+{
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	border: 1px solid transparent;
+}
+
+#link-page
+{
+	background-color: #1874CD;
+}
+
+#link-page:hover
+{
+	background-color: skyblue;
+}
+
+#link-activ
+{
+	cursor: default;
+	background-color: skyblue;
+	border-color: skyblue;
+}
+
+#link-activ:active
+{
+	box-shadow: none;
+}
+
+/****************************************************postView.php****************************************************/
+
+#post-view
+{
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+
+#return
+{
+	text-align: center;
+	color: #1874CD;
+	font-size: 1.2em;
+}
+
+#post
+{
+	margin-top: 30px;
+	background-color: #1874CD;
+	color: white;
+	border-radius: 25px;
+	margin-bottom: 10px;
+}
+
+#post-content
+{
+	margin: 0 15px 15px;
+}
+
+#report-com
+{
+	background-color: #D9EDF7;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	font-size: 0.8em;
+}
+
+#report-com:hover
+{
+	background-color: #1874CD;
+	color: white;
+}
+
+#form-comment
+{
+	width: 400px;
+}
+
+#form-comment button:hover, #form-login button:hover, #add-post-button button:hover,
+#edit-post-button button:hover, #confirm-delete button:hover, #form-edit-comment button:hover, #button-page-error:hover
+{
+	background-color: white;
+	color: black;
+}
+
+#form-comment textarea
+{
+	height: 200px;
+}
+
+/****************************************************login.php****************************************************/
+
+.form-container
+{
+	text-align: center;
+	margin-top: 30px;
+}
+
+#form-login
+{
+	width: 250px;
+	min-height: calc(100vh - 124px);
+	margin-bottom: 10px;
+}
+
+#error, #delete-post h2, #form-edit-comment
+{
+	margin-top: 30px;
+}
+
+/****************************************************addPost.php****************************************************/
+
+#add-post, #edit-post
+{
+	min-height: calc(100vh - 124px);
+	margin-bottom: 10px;
+}
+
+/****************************************************deletePost.php****************************************************/
+
+#delete-post
+{
+	text-align: center;
+	min-height: calc(100vh - 114px);
+}
+
+#table-delete
+{
+	margin-top: 30px;
+	border-color: #1874CD;
+}
+
+#header-table-delete
+{
+	background-color: #1874CD;
+	color: white;
+	font-size: 1.3em;
+}
+
+#confirm-delete-post
+{
+	margin: 0 0 5px 5px;
+}
+
+#refuse-delete-post
+{
+	margin: 0 5px 5px 0;
+}
+
+#confirm-delete button
+{
+	background-color: #1874CD;
+	font-size: 0.8em;
+}
+
+/****************************************************moderate.php****************************************************/
+
+#moderate
+{
+	min-height: calc(100vh - 114px);
+	text-align: center;
+}
+
+#moderate h2
+{
+	margin: 30px 0;
+}
+
+#moderate-choice
+{
+	margin:	0;
+}
+
+#moderate-choice button
+{
+	background-color: #d9edf7;
+	font-size: 0.8em;
+}
+
+#moderate-choice button:hover
+{
+	background-color: #1874CD;
+	color: black;
+}
+
+#button-modif-com
+{
+	margin: 0 0 5px 5px;
+}
+
+#button-delete-com
+{
+	margin: 0 5px 5px 0;
+}
+
+/****************************************************editComment.php****************************************************/
+
+#edit-comment
+{
+	min-height: calc(100vh - 110px);
+	margin-bottom: 10px;
+}
+
+/****************************************************deleteComment.php****************************************************/
+
+#delete-comment
+{
+	text-align: center;
+	min-height: calc(100vh - 110px);
+}
+
+#delete-comment h2
+{
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+
+#button-confirm-delete-com
+{
+	margin: 0 0 5px 5px;
+}
+
+#button-refuse-delete-com
+{
+	margin: 0 5px 5px 0;
+}
+
+/****************************************************404.php****************************************************/
+
+#page-error
+{
+	text-align: center;
+	font-size: 2em;
+	background-image: url('../images/fond-erreur.png');
+	background-repeat: repeat-x;
+	border-top: 1px solid black;
+	min-height: calc(100vh - 114px);
+}
+
+#message-page-error
+{
+	margin-top: 250px;
+}
+
+/****************************************************RESPONSIVE****************************************************/
+
+@media all and (max-width: 768px)
+{
+	#text-footer
+	{
+		text-align: center;
+	}
+
+	.t-home
+	{
+		width: 220px;
+		margin-left: -110px;
+	    top: 90px;
+	}
+
+	.t-home-admin
+	{
+		width: 220px;
+		margin-left: -110px;
+	    top: 185px;
+	}
+
+	#form-login
+	{
+		min-height: calc(100vh - 174px);
+	}
+
+	#form-comment
+	{
+		width: 250px;
+	}
+}

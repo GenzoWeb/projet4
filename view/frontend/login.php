@@ -1,29 +1,38 @@
-<?php $title = "Connectez-vous" ?>
+<?php
+$title = "Connectez-vous";
+ob_start();
+?>
 
-<?php ob_start(); ?>
-<p><a href="index.php">Retour à la liste des chapitres</a></p>
+<div id ="form-login" class="container">
+    <div class="form-container">
+        <h2>Se connecter</h2>
 
-<h2>Se connecter</h2>
+        <form action="" method="post" class="form-container">
+            <div class="form-group">
+                <label for="login ">Login : </label>
+                <input id="text" type="login" name="login" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="pass ">Mot de passe : </label>
+                <input id="pass" type="password" name="pass" class="form-control">
+            </div>
+            <button type="submit" id="submitAdmin" name="submitAdmin" class="btn btn-primary">Se connecter</button>
+        </form>
 
-<form action="" method="post">
-    <div>
-        <label for="login">Login</label><br />
-        <input type="text" id="login" name="login" />
+        <?php
+        if(isset($_SESSION['erreur']))
+        {
+        ?>
+            <div id="error" class="alert alert-block alert-danger">
+            <?= $_SESSION['erreur'];?>
+            </div>
+        <?php
+        }
+        ?>
     </div>
-    <div>
-        <label for="pass">Mot de passe</label><br />
-        <input type="password" id="pass" name="pass" />
-    </div>
-    <div>
-        <input type="submit" id="submitAdmin" name="submitAdmin" value="Se connecter" />
-    </div>
-</form>
+</div>
 
 <?php
-if(isset($_SESSION['erreur'])){
-    echo $_SESSION['erreur'];
-}
-
 $content = ob_get_clean(); 
 
 require('template.php'); 

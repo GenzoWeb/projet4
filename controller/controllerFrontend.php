@@ -11,6 +11,7 @@ function listPosts($begin, $numberChapter)
 	$nbTotalPages = ceil($numberPosts / $numberChapter);
 
 	if(isset($_GET['page'])){
+		$page = $_GET['page'];
 	    if($_GET['page'] <= $nbTotalPages){
 	    	$start = $begin ;
 	    }
@@ -20,6 +21,7 @@ function listPosts($begin, $numberChapter)
 	}    
 	else{
 		$start = 0;
+		$page = 1;
 	}
 
 	$posts = $postManager->getPosts($start, $numberChapter);
@@ -51,13 +53,20 @@ function post()
 
 function addcomment($postId, $author, $comment)
 {
-	$commentManager = new CommentManager();	
-	$newComment = $commentManager->postComment($postId, $author, $comment);
+	if(trim($author) && trim($comment)){
+		$commentManager = new CommentManager();	
+		$newComment = $commentManager->postComment($postId, $author, $comment);
 
-	if($newComment === false){
-		throw new Exception('Impossible d\'ajouter le commentaire !');
+		if($newComment === false){
+			throw new Exception('Impossible d\'ajouter le commentaire !');
+		}
+		else {
+			unset($_SESSION['erreur']);
+			header('Location: index.php?action=post&id=' . $postId);
+		}
 	}
-	else {
+	else{
+		$_SESSION['erreur'] = 'Veuillez remplir tout les champs';
 		header('Location: index.php?action=post&id=' . $postId);
 	}
 }

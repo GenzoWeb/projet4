@@ -37,6 +37,18 @@ function postAdmin()
 	$postManager = new PostManager();
     $postAdmin = $postManager->getPost($_GET['id']);
 
+    $numberCharacters = strlen($postAdmin['content']);
+	$string = $postAdmin['content'];
+	$text = substr($string, 0, 450);
+	$text = substr($text, 0, strrpos($text, ' '));
+
+	if($numberCharacters < 300){
+		$textPost = $string;
+	}
+	else{
+		$textPost = $text . ' ...';
+	}
+
     if($_GET['action'] == 'editPost'){
     	require('view/backend/editPost.php');
     }
@@ -55,7 +67,7 @@ function editPost($id, $title, $content)
 	}
 	else {
 		header('Location: index.php?page=' . $_GET['page']);
-	}		
+	}			
 }
 
 function removePost($id)
@@ -126,5 +138,5 @@ function logout()
 	$_SESSION = array();
 	session_destroy();
 
-	header('Location: index.php?page=1');
+	header('Location: index.php');
 }

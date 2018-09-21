@@ -4,177 +4,239 @@ require('controller/controllerFrontend.php');
 require('controller/controllerBackend.php');
 
 $begin = 0;
-$chapterPerPage = 2;
+$chapterPerPage = 3;
 
-try{
-	if (isset($_GET['action'])) {
-	    if ($_GET['action'] == 'listPosts') {
+try
+{
+	if (isset($_GET['action']))
+	{
+	    if ($_GET['action'] == 'listPosts')
+	    {
 	        listPosts($begin ,$chapterPerPage);
 	    }
-	    elseif ($_GET['action'] == 'post') {
-	        if (isset($_GET['id']) && $_GET['id'] > 0) {
+	    elseif ($_GET['action'] == 'post')
+	    {
+	        if (isset($_GET['id']) && $_GET['id'] > 0)
+	        {
 	            post();
 	        }
-	        else {
+	        else
+	        {
 	            throw new Exception('Aucun identifiant de chapitre envoyé');
 	        }
 	    }
-	    elseif($_GET['action'] == 'addComment') {
-	    	if(isset($_GET['id']) && $_GET['id'] > 0){
-	    		if (trim($_POST['author']) && trim($_POST['comment'])){
+	    elseif($_GET['action'] == 'addComment')
+	    {
+	    	if(isset($_GET['id']) && $_GET['id'] > 0)
+	    	{
+	    		if (!empty($_POST['author']) && !empty($_POST['comment']))
+	    		{
 	    			addComment($_GET['id'], $_POST['author'], $_POST['comment']);
 	    		}
-	    		else{
+	    		else
+	    		{
 	    			$_SESSION['erreur'] = 'Veuillez remplir tout les champs';
 	    			header('Location: index.php?action=post&id=' . $_GET['id']);
 	    		}
 	    	}
-	    	else{
+	    	else
+	    	{
 	    		throw new Exception('Aucun identifiant de chapitre envoyé');
 	    	}
 	    }
-	    elseif(isset($_POST['submitAdmin'])){
-	    	if(trim($_POST['login']) && trim($_POST['pass'])){ 
+	    elseif(isset($_POST['submitAdmin']))
+	    {
+	    	if(!empty($_POST['login']) && !empty($_POST['pass']))
+	    	{ 
 	    		login($_POST['login']);
 	    	}
-	    	else{
+	    	else
+	    	{
 		        $_SESSION['erreur'] = 'Veuillez remplir tout les champs';
 		        require('view/frontend/login.php');
 		    }	
 	    }
-	   	elseif($_GET['action'] == 'report') {
-	    	if(isset($_GET['id']) && $_GET['id'] > 0){
-	    		if(isset($_GET['post_id']) && $_GET['post_id'] > 0){
-	    			if(isset($_GET['reporting']) && $_GET['reporting'] >= 0){
+	   	elseif($_GET['action'] == 'report')
+	   	{
+	    	if(isset($_GET['id']) && $_GET['id'] > 0)
+	    	{
+	    		if(isset($_GET['post_id']) && $_GET['post_id'] > 0)
+	    		{
+	    			if(isset($_GET['reporting']) && $_GET['reporting'] >= 0)
+	    			{
 	    				reportComment($_GET['id'], $_GET['post_id'], $_GET['reporting']);
 	    			}
-	    			else{
+	    			else
+	    			{
 	    				throw new Exception('Ce chapitre n\'existe pas');
 	    			}
 	    		}
 	    	}
 	    }
-	    elseif($_GET['action'] == 'error') {
+	    elseif($_GET['action'] == 'error')
+	    {
 	    	require('view/frontend/404.php');
 	    }
-	    elseif($_GET['action'] == 'login' && (!isset($_SESSION['login']))){
+	    elseif($_GET['action'] == 'login' && (!isset($_SESSION['login'])))
+	    {
 			require('view/frontend/login.php');
 		}		
-		elseif(isset($_SESSION['login'])){
-			if($_GET['action'] == 'admin'){
+		elseif(isset($_SESSION['login']))
+		{
+			if($_GET['action'] == 'admin')
+			{
 				listPosts($begin ,$chapterPerPage);
 			}
-			elseif($_GET['action'] == 'newPost'){
+			elseif($_GET['action'] == 'newPost')
+			{
 				require('view/backend/addPost.php');
 			}
-		    elseif($_GET['action'] == 'addPost'){
-		    	if (trim($_POST['title']) && trim($_POST['content'])){
+		    elseif($_GET['action'] == 'addPost')
+		    {
+		    	if (trim($_POST['title']) && trim($_POST['content']))
+		    	{
 					addPost($_POST['title'], $_POST['content']);
 					listPosts($begin ,$chapterPerPage);
 				}
-				else{
+				else
+				{
 					$_SESSION['erreur'] = 'Tous les champs ne sont pas remplis !';
 					require('view/backend/addPost.php');
 				}
 		    }
-		    elseif ($_GET['action'] == 'editPost' || $_GET['action'] == 'deletePost') {
-		        if (isset($_GET['id']) && $_GET['id'] > 0) {
+		    elseif ($_GET['action'] == 'editPost' || $_GET['action'] == 'deletePost')
+		    {
+		        if (isset($_GET['id']) && $_GET['id'] > 0)
+		        {
 		            postAdmin();
 		        }
-		        else {
+		        else
+		        {
 		            throw new Exception('Aucun identifiant de chapitre envoyé');
 		        }
 		    }
-		    elseif ($_GET['action'] == 'update') {
-		        if (isset($_GET['id']) && $_GET['id'] > 0) {
-		        	if (trim($_POST['title']) && trim($_POST['content'])){
+		    elseif ($_GET['action'] == 'update')
+		    {
+		        if (isset($_GET['id']) && $_GET['id'] > 0)
+		        {
+		        	if (trim($_POST['title']) && trim($_POST['content']))
+		        	{
 		            	editPost($_GET['id'], $_POST['title'], $_POST['content']);
 		            }
-		            else{
+		            else
+		            {
 	    				$_SESSION['erreur'] = 'Tous les champs ne sont pas remplis !';
 	    				header('Location: index.php?action=editPost&id=' . $_GET['id'] . '&page=' . $_GET['page']);
 	    			}
 		        }
-		        else {
+		        else
+		        {
 		            throw new Exception('Aucun identifiant de chapitre envoyé');
 		        }
 		    }
-		    elseif ($_GET['action'] == 'remove'){
-		     	if (isset($_GET['id']) && $_GET['id'] > 0) {
+		    elseif ($_GET['action'] == 'remove')
+		    {
+		     	if (isset($_GET['id']) && $_GET['id'] > 0)
+		     	{
 		     		removePost($_GET['id']);
 		     	}
-		     	else{
+		     	else
+		     	{
 		     		throw new Exception('Aucun identifiant de chapitre envoyé');
 		     	}   
 		    }
-		    elseif ($_GET['action'] == 'moderate'){
+		    elseif ($_GET['action'] == 'moderate')
+		    {
 		     	moderateComments();  
 		    }
-		    elseif($_GET['action'] == 'logout'){
+		    elseif($_GET['action'] == 'logout')
+		    {
 		    	logout();
-		    } 
-		    elseif ($_GET['action'] == 'deleteComment') {
-		        if (isset($_GET['id']) && $_GET['id'] > 0) {
+		    }  
+		    elseif ($_GET['action'] == 'deleteComment')
+		    {
+		        if (isset($_GET['id']) && $_GET['id'] > 0)
+		        {
 		            comment();
 		        }
-		        else {
+		        else
+		        {
 		            throw new Exception('Aucun identifiant de chapitre envoyé');
 		        }
 		    }
-		    elseif ($_GET['action'] == 'removeComment'){
-		     	if (isset($_GET['id']) && $_GET['id'] > 0) {
+		    elseif ($_GET['action'] == 'removeComment')
+		    {
+		     	if (isset($_GET['id']) && $_GET['id'] > 0)
+		     	{
 		     		removeComment($_GET['id']);
 		     	}
-		     	else{
+		     	else
+		     	{
 		     		throw new Exception('Aucun identifiant de chapitre envoyé');
 		     	}   
 		    }
-		    elseif ($_GET['action'] == 'editComment'){
-		    	if (isset($_GET['id']) && $_GET['id'] > 0) {
+		    elseif ($_GET['action'] == 'editComment')
+		    {
+		    	if (isset($_GET['id']) && $_GET['id'] > 0)
+		    	{
 		    		comment();
 		    	}
-		    	else {
+		    	else
+		    	{
 		            throw new Exception('Aucun identifiant de chapitre envoyé');
 		        }
 		    }	
-		    elseif ($_GET['action'] == 'updateComment'){
-		    	if (isset($_GET['id']) && $_GET['id'] > 0) {
-		    		if (trim($_POST['comment'])){
+		    elseif ($_GET['action'] == 'updateComment')
+		    {
+		    	if (isset($_GET['id']) && $_GET['id'] > 0)
+		    	{
+		    		if (trim($_POST['comment']))
+		    		{
 		    			editComment($_GET['id'], $_POST['comment']);
 		     		}
-		     		else{
+		     		else
+		     		{
 	    				$_SESSION['erreur'] = 'Tous les champs ne sont pas remplis !';
-	    				header('Location: index.php?action=editComment&id=' . $_GET['id']);	  
+	    				header('Location: index.php?action=editComment&id=' . $_GET['id']);	    				
 	    			}
 		        }
-		        else {
+		        else
+		        {
 		            throw new Exception('Aucun identifiant de chapitre envoyé');
 		        }
 		    }
-		    else{
+		    else
+		    {
 		     	listPosts($begin ,$chapterPerPage);
-		    } 	
+		    }	
 		}
-		else{
-			if(isset($_POST['login'])){
+		else
+		{
+			if(isset($_POST['login']))
+			{
 				login($_POST['login']);
 			}
-			else{
+			else
+			{
 				require('view/frontend/login.php');
 			}
 		}
 	}
-	elseif(isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0){
+	elseif(isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] > 0)
+	{
 		$_GET['page'] = intval($_GET['page']);
 		$currentPage = $_GET['page'];
 		$begin = ($currentPage - 1) * $chapterPerPage;
 
 		listPosts($begin ,$chapterPerPage);
 	}	
-	else {
-	    listPosts($begin ,$chapterPerPage);
+	else
+	{
+	    require('view/frontend/home.php');
 	}
 }
-catch(Exception $e){
-	echo 'Erreur :' . $e->getMessage();
+catch(Exception $e)
+{
+	$errorMessage = $e->getMessage();
+	require('view/frontend/errorMessage.php');
 }
